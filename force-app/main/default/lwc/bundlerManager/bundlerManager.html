@@ -1,0 +1,66 @@
+<template>
+    <div if:true={isMain} class="card">
+        <div class="card-body">
+            <h5 class="card-title">Bundler Manager</h5>
+            <button type="button" class="btn btn-primary" onclick={handleNewBundler}>
+                New Bundler
+            </button>
+            <div for:each={cards} for:item="card" key={card.id}>
+                <label for="cb-inner">{card}</label>
+                <lightning-button
+                    icon-name="utility:new"
+                    variant="brand"
+                    onclick={handleAddBox}>
+                </lightning-button>
+                <div id="cb-inner" style="margin-top: 5px" class="card card-body">
+                    <c-box-card
+                        boxes={boxes}
+                        first-name={firstName}
+                        last-name={lastName}
+                        phone={phone}>
+                    </c-box-card>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div if:true={isModal} class="modal-fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Name</h5>
+                    <button type="button" class="close" onclick={handleDismissModal} aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            <div class="modal-body">
+                <lightning-input type="text" label="Enter name" onchange={handleInputName}></lightning-input>
+            </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" onclick={handleDismissModal}>Close</button>
+                    <button type="button" class="btn btn-primary" onclick={handleAddCard}>Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div if:true={isInnerModal} class="modal-fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Box data</h5>
+                    <button type="button" class="close" onclick={handleDismissModal} aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            <div class="modal-body">
+                <lightning-input type="text" label="Enter first name" onchange={handleInputFirstName}></lightning-input>
+                <lightning-input type="text" label="Enter last name" onchange={handleInputLastName}></lightning-input>
+                <lightning-input type="text" label="Enter phone" onchange={handleInputPhone}></lightning-input>
+            </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" onclick={handleDismissModal}>Close</button>
+                    <button type="button" class="btn btn-primary" onclick={handleAddNewBox}>Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
