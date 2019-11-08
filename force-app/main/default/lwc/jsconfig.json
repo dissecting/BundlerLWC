@@ -2,11 +2,11 @@
     "compilerOptions": {
         "baseUrl": ".",
         "paths": {
-            "c/bundlerManager": [
-                "bundlerManager/bundlerManager.js"
-            ],
             "c/boxCard": [
                 "boxCard/boxCard.js"
+            ],
+            "c/bundlerManager": [
+                "bundlerManager/bundlerManager.js"
             ]
         },
         "experimentalDecorators": true

@@ -5,20 +5,24 @@
             <button type="button" class="btn btn-primary" onclick={handleNewBundler}>
                 New Bundler
             </button>
-            <div for:each={cards} for:item="card" key={card.id}>
-                <label for="cb-inner">{card}</label>
-                <lightning-button
-                    icon-name="utility:new"
-                    variant="brand"
-                    onclick={handleAddBox}>
-                </lightning-button>
-                <div id="cb-inner" style="margin-top: 5px" class="card card-body">
-                    <c-box-card
-                        boxes={boxes}
-                        first-name={firstName}
-                        last-name={lastName}
-                        phone={phone}>
-                    </c-box-card>
+            <div for:each={cards} for:item="card" key={card.indexCard}>
+                <div style="margin-top: 5px" class="card card-body">
+                    <label for="cb-inner">{card.nameValue}</label>
+                    <lightning-button
+                        name={card.indexCard}
+                        icon-name="utility:new"
+                        variant="brand"
+                        onclick={handleAddBox}>
+                    </lightning-button>
+                    <div class="boxes-class" for:each={card.boxes} for:item="box" key={box.id}>
+                        <div id="cb-inner" draggable="true" style="margin-top: 5px" class="card card-body">
+                            <c-box-card
+                                first-name={box.firstName}
+                                last-name={box.lastName}
+                                phone={box.phone}>
+                            </c-box-card>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

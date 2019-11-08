@@ -1,6 +1,7 @@
 import { LightningElement, track } from 'lwc';
 import bootstrap from '@salesforce/resourceUrl/bootstrap';
-import { loadStyle } from 'lightning/platformResourceLoader';
+import sortable from '@salesforce/resourceUrl/sortable';
+import { loadScript, loadStyle } from 'lightning/platformResourceLoader';
 
 export default class bundlerManager extends LightningElement {
 
@@ -11,7 +12,8 @@ export default class bundlerManager extends LightningElement {
     @track phone;
     @track nameValue;
     @track pageType = 'mainPage';
-    boxCount = 0;
+    @track indexCard = 0;
+    @track currentIndex = 0;
 
     get isModal() {
         return this.pageType === "modalPage" ? true : false;
@@ -28,6 +30,7 @@ export default class bundlerManager extends LightningElement {
     renderedCallback() {
 
         Promise.all([
+            loadScript(this, sortable + '/Sortable.js'),
             loadStyle(this, bootstrap + '/bootstrap.css')
         ])
         .then(() => {
@@ -39,9 +42,6 @@ export default class bundlerManager extends LightningElement {
     }
 
     handleNewBundler() {
-        this.firstName = '';
-        this.lastName = '';
-        this.phone = '';
         this.pageType = "modalPage";
     }
 
@@ -51,20 +51,51 @@ export default class bundlerManager extends LightningElement {
 
     handleAddCard() {
         if (this.nameValue) {
-            this.cards.push(this.nameValue);
+            this.cards = [
+                ...this.cards,{
+                    indexCard: this.indexCard,
+                    nameValue: this.nameValue
+                }
+            ];
+            this.indexCard++;
             this.pageType = "mainPage";
         }
     }
 
     handleAddNewBox() {
         if (this.firstName && this.lastName && this.phone) {
-            this.boxCount++;
-            this.boxes.push(this.boxCount);
+            this.boxes = [
+                ...this.boxes,{
+                    boxId: this.currentIndex,
+                    firstName: this.firstName,
+                    lastName: this.lastName,
+                    phone: this.phone
+                }
+            ];
+
+            let tempBox = [];
+
+            for (let i = 0; i < this.boxes.length; i++) {
+                if (this.boxes[i].boxId === this.currentIndex) {
+                    tempBox.push(this.boxes[i]);
+                }
+            }
+
+            this.cards[this.currentIndex] = {
+                indexCard: this.cards[this.currentIndex].indexCard,
+                nameValue: this.cards[this.currentIndex].nameValue,
+                boxes: tempBox
+            };
+
+            this.firstName = '';
+            this.lastName = '';
+            this.phone = '';
             this.pageType = "mainPage";
         }
     }
 
-    handleAddBox() {
+    handleAddBox(event) {
+        this.currentIndex = event.target.name;
         this.pageType = "innerModalPage";
     }
 
