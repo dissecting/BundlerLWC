@@ -1,0 +1,28 @@
+.box-card-class {
+    min-height: 80px;
+    min-width: 80px;
+    max-height: 80px;
+    max-width: 80px;
+    margin-top: 5px
+}
+
+.main-card {
+    min-height: 900px;
+    min-width: 570px;
+    max-height: 900px;
+    max-width: 570px;
+}
+
+.inner-card {
+    margin-top: 5px;
+    min-height: 360px;
+    max-height: 360px;
+}
+
+.card-name {
+    display: block;
+    max-width: 100px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

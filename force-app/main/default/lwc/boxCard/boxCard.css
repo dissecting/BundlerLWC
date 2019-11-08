@@ -1,0 +1,7 @@
+.output-text {
+    display: block;
+    max-width: 70px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

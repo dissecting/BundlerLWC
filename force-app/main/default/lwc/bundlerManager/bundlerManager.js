@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { LightningElement, track } from 'lwc';
 import bootstrap from '@salesforce/resourceUrl/bootstrap';
 import sortable from '@salesforce/resourceUrl/sortable';
@@ -14,6 +15,7 @@ export default class bundlerManager extends LightningElement {
     @track pageType = 'mainPage';
     @track indexCard = 0;
     @track currentIndex = 0;
+    @track boxCard = true;
 
     get isModal() {
         return this.pageType === "modalPage" ? true : false;
@@ -34,6 +36,10 @@ export default class bundlerManager extends LightningElement {
             loadStyle(this, bootstrap + '/bootstrap.css')
         ])
         .then(() => {
+            var currentBlock = this.template.querySelector('div.box-list');
+            if (currentBlock) {
+                Sortable.create(currentBlock, {});
+            }
             console.log('Downloaded');
         })
         .catch(error => {
@@ -97,6 +103,10 @@ export default class bundlerManager extends LightningElement {
     handleAddBox(event) {
         this.currentIndex = event.target.name;
         this.pageType = "innerModalPage";
+    }
+
+    handleToggleBox() {
+        this.boxCard = !this.boxCard;
     }
 
     handleInputName(event) {

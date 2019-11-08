@@ -1,26 +1,51 @@
 <template>
-    <div if:true={isMain} class="card">
+    <div if:true={isMain} class="main-card card overflow-auto">
         <div class="card-body">
             <h5 class="card-title">Bundler Manager</h5>
             <button type="button" class="btn btn-primary" onclick={handleNewBundler}>
                 New Bundler
             </button>
             <div for:each={cards} for:item="card" key={card.indexCard}>
-                <div style="margin-top: 5px" class="card card-body">
-                    <label for="cb-inner">{card.nameValue}</label>
-                    <lightning-button
-                        name={card.indexCard}
-                        icon-name="utility:new"
-                        variant="brand"
-                        onclick={handleAddBox}>
-                    </lightning-button>
-                    <div class="boxes-class" for:each={card.boxes} for:item="box" key={box.id}>
-                        <div id="cb-inner" draggable="true" style="margin-top: 5px" class="card card-body">
-                            <c-box-card
-                                first-name={box.firstName}
-                                last-name={box.lastName}
-                                phone={box.phone}>
-                            </c-box-card>
+                <div class="inner-card border border-success card overflow-auto">
+                    <div class="card-header">
+                        <div class="d-flex md-3">
+                            <div class="mr-auto p-2">
+                                <span class="card-name">
+                                    <lightning-helptext content ={card.nameValue}></lightning-helptext>
+                                    {card.nameValue}
+                                </span>
+                            </div>
+                            <div class="p-2">
+                                <lightning-button
+                                    label="Add"
+                                    name={card.indexCard}
+                                    icon-name="utility:new"
+                                    variant="brand"
+                                    onclick={handleAddBox}>
+                                </lightning-button>
+                            </div>
+                            <div class="p-2">
+                                <lightning-button
+                                    label=">"
+                                    variant="brand"
+                                    onclick={handleToggleBox}>
+                                </lightning-button>
+                            </div>
+                        </div>
+                    </div>
+                    <div if:true={boxCard} class="card-body">
+                        <div class="box-list row justify-content-md-left d-flex flex-wrap">
+                            <div for:each={card.boxes} for:item="box" key={box.id}>
+                                <div class="border border-primary card card-body">
+                                    <div draggable="true" class="box-card-class">
+                                        <c-box-card
+                                            first-name={box.firstName}
+                                            last-name={box.lastName}
+                                            phone={box.phone}>
+                                        </c-box-card>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
