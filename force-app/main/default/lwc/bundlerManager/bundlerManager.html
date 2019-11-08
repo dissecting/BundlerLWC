@@ -17,7 +17,6 @@
                             </div>
                             <div class="p-2">
                                 <lightning-button
-                                    label="Add"
                                     name={card.indexCard}
                                     icon-name="utility:new"
                                     variant="brand"
@@ -26,16 +25,17 @@
                             </div>
                             <div class="p-2">
                                 <lightning-button
-                                    label=">"
-                                    variant="brand"
+                                    name={card.indexCard}
+                                    icon-name="utility:chevrondown"
+                                    variant="brand-outline"
                                     onclick={handleToggleBox}>
                                 </lightning-button>
                             </div>
                         </div>
                     </div>
-                    <div if:true={boxCard} class="card-body">
+                    <div class="card-body">
                         <div class="box-list row justify-content-md-left d-flex flex-wrap">
-                            <div for:each={card.boxes} for:item="box" key={box.id}>
+                            <div if:true={card.boxCard} for:each={card.boxes} for:item="box" key={box.id}>
                                 <div class="border border-primary card card-body">
                                     <div draggable="true" class="box-card-class">
                                         <c-box-card

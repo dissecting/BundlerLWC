@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import { LightningElement, track } from 'lwc';
 import bootstrap from '@salesforce/resourceUrl/bootstrap';
 import sortable from '@salesforce/resourceUrl/sortable';
@@ -36,13 +35,17 @@ export default class bundlerManager extends LightningElement {
             loadStyle(this, bootstrap + '/bootstrap.css')
         ])
         .then(() => {
-            var currentBlock = this.template.querySelector('div.box-list');
+            let currentBlock = this.template.querySelectorAll('div.box-list');
+
             if (currentBlock) {
-                Sortable.create(currentBlock, {});
+                currentBlock.forEach(currBlock => {
+                    // eslint-disable-next-line no-undef
+                    Sortable.create(currBlock, {});
+                });
             }
-            console.log('Downloaded');
         })
         .catch(error => {
+            // eslint-disable-next-line no-console
             console.log(error.message);
         });
     }
@@ -60,7 +63,8 @@ export default class bundlerManager extends LightningElement {
             this.cards = [
                 ...this.cards,{
                     indexCard: this.indexCard,
-                    nameValue: this.nameValue
+                    nameValue: this.nameValue,
+                    boxCard: this.boxCard
                 }
             ];
             this.indexCard++;
@@ -90,6 +94,7 @@ export default class bundlerManager extends LightningElement {
             this.cards[this.currentIndex] = {
                 indexCard: this.cards[this.currentIndex].indexCard,
                 nameValue: this.cards[this.currentIndex].nameValue,
+                boxCard: this.cards[this.currentIndex].boxCard,
                 boxes: tempBox
             };
 
@@ -105,8 +110,14 @@ export default class bundlerManager extends LightningElement {
         this.pageType = "innerModalPage";
     }
 
-    handleToggleBox() {
-        this.boxCard = !this.boxCard;
+    handleToggleBox(event) {
+        this.currentIndex = event.target.name;
+        this.cards[this.currentIndex] = {
+            indexCard: this.cards[this.currentIndex].indexCard,
+            nameValue: this.cards[this.currentIndex].nameValue,
+            boxCard: !this.cards[this.currentIndex].boxCard,
+            boxes: this.cards[this.currentIndex].boxes
+        };
     }
 
     handleInputName(event) {
