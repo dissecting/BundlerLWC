@@ -40,7 +40,9 @@ export default class bundlerManager extends LightningElement {
             if (currentBlock) {
                 currentBlock.forEach(currBlock => {
                     // eslint-disable-next-line no-undef
-                    Sortable.create(currBlock, {});
+                    Sortable.create(currBlock, {
+                        animation: 150
+                    });
                 });
             }
         })
