@@ -7,6 +7,9 @@
             ],
             "c/bundlerManager": [
                 "bundlerManager/bundlerManager.js"
+            ],
+            "c/bootstrap": [
+                "../staticresources/bootstrap/bootstrap.js"
             ]
         },
         "experimentalDecorators": true

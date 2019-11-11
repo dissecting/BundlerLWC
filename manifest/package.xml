@@ -5,5 +5,10 @@
 		<members>bundlerManager</members>
 		<name>LightningComponentBundle</name>
 	</types>
+	<types>
+		<members>bootstrap</members>
+		<members>sortable</members>
+		<name>StaticResource</name>
+	</types>
 	<version>46.0</version>
 </Package>
