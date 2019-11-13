@@ -11,32 +11,32 @@
                         <div class="d-flex md-3">
                             <div class="mr-auto p-2">
                                 <span class="card-name">
-                                    <lightning-helptext content ={card.nameValue}></lightning-helptext>
+                                    <lightning-helptext content={card.nameValue}></lightning-helptext>
                                     {card.nameValue}
                                 </span>
                             </div>
                             <div class="p-2">
-                                <lightning-button
+                                <lightning-button-icon
                                     name={card.indexCard}
                                     icon-name="utility:new"
                                     variant="brand"
                                     onclick={handleAddBox}>
-                                </lightning-button>
+                                </lightning-button-icon>
                             </div>
                             <div class="p-2">
-                                <lightning-button
+                                <lightning-button-icon
                                     name={card.indexCard}
                                     icon-name="utility:chevrondown"
                                     variant="brand-outline"
                                     onclick={handleToggleBox}>
-                                </lightning-button>
+                                </lightning-button-icon>
                             </div>
                         </div>
                     </div>
-                    <div class="card-body">
-                        <div class="box-list row justify-content-md-left d-flex flex-wrap">
-                            <div if:true={card.boxCard} for:each={card.boxes} for:item="box" key={box.id}>
-                                <div class="border border-primary card card-body">
+                    <div if:true={card.boxCard} class="card-body">
+                        <div id={card.indexCard} class="box-list row justify-content-md-left d-flex flex-wrap">
+                            <div for:each={card.boxes} for:item="box" key={box.id}>
+                                <div class="box-elements border border-primary card card-body">
                                     <div draggable="true" class="box-card-class">
                                         <c-box-card
                                             first-name={box.firstName}
@@ -62,7 +62,7 @@
                     </button>
                 </div>
             <div class="modal-body">
-                <lightning-input type="text" label="Enter name" onchange={handleInputName}></lightning-input>
+                <lightning-input type="text" label="Enter name" name="cardName" onchange={handleInputData}></lightning-input>
             </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" onclick={handleDismissModal}>Close</button>
@@ -81,9 +81,9 @@
                     </button>
                 </div>
             <div class="modal-body">
-                <lightning-input type="text" label="Enter first name" onchange={handleInputFirstName}></lightning-input>
-                <lightning-input type="text" label="Enter last name" onchange={handleInputLastName}></lightning-input>
-                <lightning-input type="text" label="Enter phone" onchange={handleInputPhone}></lightning-input>
+                <lightning-input type="text" label="Enter first name" name="firstName" onchange={handleInputData}></lightning-input>
+                <lightning-input type="text" label="Enter last name" name="lastName" onchange={handleInputData}></lightning-input>
+                <lightning-input type="text" label="Enter phone" name="phone" onchange={handleInputData}></lightning-input>
             </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" onclick={handleDismissModal}>Close</button>

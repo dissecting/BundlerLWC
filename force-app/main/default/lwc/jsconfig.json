@@ -10,6 +10,9 @@
             ],
             "c/bootstrap": [
                 "../staticresources/bootstrap/bootstrap.js"
+            ],
+            "c/sortable": [
+                "../staticresources/sortable/sortable.js"
             ]
         },
         "experimentalDecorators": true

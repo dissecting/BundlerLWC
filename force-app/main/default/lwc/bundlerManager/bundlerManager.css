@@ -8,15 +8,15 @@
 
 .main-card {
     min-height: 900px;
-    min-width: 570px;
+    min-width: 620px;
     max-height: 900px;
-    max-width: 570px;
+    max-width: 620px;
 }
 
 .inner-card {
     margin-top: 5px;
-    min-height: 370px;
-    max-height: 370px;
+    min-height: 390px;
+    max-height: 390px;
 }
 
 .card-name {
@@ -25,4 +25,12 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+.box-elements {
+    margin: 5px;
+}
+
+.background-ghost {
+    background-color: dodgerblue;
 }
