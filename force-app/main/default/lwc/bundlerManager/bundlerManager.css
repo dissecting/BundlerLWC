@@ -15,8 +15,21 @@
 
 .inner-card {
     margin-top: 5px;
-    min-height: 390px;
-    max-height: 390px;
+    min-width: 560px;
+    max-width: 560px;
+}
+
+.inner-card-body {
+    transition: 0.3s ease-out;
+    min-height: 310px;
+    max-height: 310px;
+}
+
+.inner-card-close {
+    transition: 0.3s ease-out;
+    min-height: 0px;
+    max-height: 0px;
+    padding: 0px;
 }
 
 .card-name {

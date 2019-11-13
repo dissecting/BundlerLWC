@@ -18,6 +18,8 @@ export default class bundlerManager extends LightningElement {
     @track indexCurrentCard;
     @track oldIndex;
     @track newIndex;
+    openCard = 'inner-card-body card-body';
+    closeCard = 'inner-card-close card-body';
 
     get isModal() {
         return this.pageType === 'modalPage' ? true : false;
@@ -34,17 +36,11 @@ export default class bundlerManager extends LightningElement {
     renderedCallback() {
         let self = this;
         Promise.all([
-            loadScript(this, sortable + '/Sortable.js'),
-            loadStyle(this, bootstrap + '/bootstrap.css')
+            loadStyle(this, bootstrap + '/bootstrap.css'),
+            loadScript(this, sortable + '/Sortable.js')
         ])
         .then(() => {
             let currentBlock = this.template.querySelectorAll('div.box-list');
-            if (this.newIndex) {
-                self.handleSortBoxes();
-                self.indexCurrentCard = '';
-                self.oldIndex = '';
-                self.newIndex = '';
-            }
             if (currentBlock) {
                 currentBlock.forEach(currBlock => {
                     // eslint-disable-next-line no-undef
@@ -58,6 +54,12 @@ export default class bundlerManager extends LightningElement {
                         }
                     });
                 });
+                if (self.newIndex || self.newIndex === 0) {
+                    self.handleSortBoxes();
+                    self.indexCurrentCard = '';
+                    self.oldIndex = '';
+                    self.newIndex = '';
+                }
             }
         })
         .catch(error => {
@@ -69,6 +71,7 @@ export default class bundlerManager extends LightningElement {
     handleSortBoxes() {
         if (this.newIndex >= this.cards[this.indexCurrentCard].boxes.length) {
             let i = this.newIndex - this.cards[this.indexCurrentCard].boxes.length;
+
             while ((i--) + 1) {
                 this.cards[this.indexCurrentCard].boxes.push(undefined);
             }
@@ -89,6 +92,7 @@ export default class bundlerManager extends LightningElement {
             this.cards.push({
                 indexCard: this.indexCard,
                 nameValue: this.nameValue,
+                boxStyle: this.openCard,
                 boxCard: this.boxCard,
                 boxes: []
             });
@@ -124,6 +128,11 @@ export default class bundlerManager extends LightningElement {
     handleToggleBox(event) {
         this.currentIndex = event.target.name;
         this.cards[this.currentIndex].boxCard = !this.cards[this.currentIndex].boxCard;
+        if (this.cards[this.currentIndex].boxCard) {
+            this.cards[this.currentIndex].boxStyle = this.openCard;
+        } else {
+            this.cards[this.currentIndex].boxStyle = this.closeCard;
+        }
     }
 
     handleInputData(event) {
