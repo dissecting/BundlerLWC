@@ -6,18 +6,18 @@ import { loadScript, loadStyle } from 'lightning/platformResourceLoader';
 export default class bundlerManager extends LightningElement {
 
     @track cards = [];
-    @track firstName;
-    @track lastName;
-    @track phone;
-    @track nameValue;
     @track pageType = 'mainPage';
-    @track indexCard = 0;
-    @track indexMap = new Map();
-    @track currentIndex = 0;
-    @track boxCard = true;
-    @track indexCurrentCard;
-    @track oldIndex;
-    @track newIndex;
+    nameValue;
+    firstName;
+    lastName;
+    phone;
+    indexCard = 0;
+    indexMap = new Map();
+    currentIndex = 0;
+    boxCard = true;
+    indexCurrentCard;
+    oldIndex;
+    newIndex;
     openCard = 'inner-card-body card-body';
     closeCard = 'inner-card-close card-body';
 

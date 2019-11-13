@@ -35,7 +35,7 @@
                     </div>
                     <div class={card.boxStyle}>
                         <div if:true={card.boxCard} id={card.indexCard} class="box-list row justify-content-md-left d-flex flex-wrap">
-                            <div for:each={card.boxes} for:item="box" key={box.id}>
+                            <div for:each={card.boxes} for:item="box" key={box.boxId}>
                                 <div class="box-elements border border-primary card card-body">
                                     <div draggable="true" class="box-card-class">
                                         <c-box-card
