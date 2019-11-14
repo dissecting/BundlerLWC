@@ -47,19 +47,14 @@ export default class bundlerManager extends LightningElement {
                     Sortable.create(currBlock, {
                         animation: 150,
                         ghostClass: 'background-ghost',
-                        onSort: function (event) {
+                        onEnd: function (event) {
                             self.indexCurrentCard = Number((event.target.id).split('-')[0]);
                             self.oldIndex = event.oldIndex;
                             self.newIndex = event.newIndex;
+                            self.setTimeout(self.handleSortBoxes(), 500);
                         }
                     });
                 });
-                if (self.newIndex || self.newIndex === 0) {
-                    self.handleSortBoxes();
-                    self.indexCurrentCard = '';
-                    self.oldIndex = '';
-                    self.newIndex = '';
-                }
             }
         })
         .catch(error => {
